@@ -25,24 +25,30 @@
 ;;; Code:
 
 (with-eval-after-load 'cider
+
+  (defun cider-buddy-shortcut-str (command)
+    (prin1-to-string (key-description (where-is-internal command cider-mode-map t)) t))
+
   (with-eval-after-load 'hydra
     (defhydra hydra-cider-buddy-eval (:hint nil :color blue)
       "
 CIDER Buddy: Evaluation Commands Menu
-----------------------------------------------
-_a_: cider-eval-buffer                 C-c c e b
-_b_: cider-eval-defun-at-point         C-c C-c
-_c_: cider-eval-defun-to-comment       C-c M-;
-_d_: cider-eval-file
-_e_: cider-eval-last-sexp              C-c C-e
-_f_: cider-eval-last-sexp-and-replace  C-c C-w
-_g_: cider-eval-last-sexp-to-repl      C-c M-e
-_h_: cider-eval-ns-form                C-c C-n
-_i_: cider-eval-region                 C-c C-r
-_j_: cider-interrupt-eval              C-c C-b
-_k_: cider-pprint-eval-defun-at-point  C-c C-f
-_l_: cider-pprint-eval-last-sexp       C-c C-p
-_m_: cider-read-and-eval               C-c M-:"
+
+ Key^^    Command                           Shortcut
+----^^------------------------------------------------
+ _a_:     cider-eval-buffer                 %(cider-buddy-shortcut-str 'cider-eval-buffer)
+ _b_:     cider-eval-defun-at-point         %(cider-buddy-shortcut-str 'cider-eval-defun-at-point)
+ _c_:     cider-eval-defun-to-comment       %(cider-buddy-shortcut-str 'cider-eval-defun-to-comment)
+ _d_:     cider-eval-file                   %(cider-buddy-shortcut-str 'cider-eval-file)
+ _e_:     cider-eval-last-sexp              %(cider-buddy-shortcut-str 'cider-eval-last-sexp)
+ _f_:     cider-eval-last-sexp-and-replace  %(cider-buddy-shortcut-str 'cider-eval-last-sexp-and-replace)
+ _g_:     cider-eval-last-sexp-to-repl      %(cider-buddy-shortcut-str 'cider-eval-last-sexp-to-repl)
+ _h_:     cider-eval-ns-form                %(cider-buddy-shortcut-str 'cider-eval-ns-form)
+ _i_:     cider-eval-region                 %(cider-buddy-shortcut-str 'cider-eval-region)
+ _j_:     cider-interrupt-eval              %(cider-buddy-shortcut-str 'cider-interrupt-eval)
+ _k_:     cider-pprint-eval-defun-at-point  %(cider-buddy-shortcut-str 'cider-pprint-eval-defun-at-point)
+ _l_:     cider-pprint-eval-last-sexp       %(cider-buddy-shortcut-str 'cider-pprint-eval-last-sexp)
+ _m_:     cider-read-and-eval               %(cider-buddy-shortcut-str 'cider-read-and-eval)"
       ("a" cider-eval-buffer)
       ("b" cider-eval-defun-at-point)
       ("c" cider-eval-defun-to-comment)
@@ -61,14 +67,16 @@ _m_: cider-read-and-eval               C-c M-:"
     (defhydra hydra-cider-buddy-doc (:hint nil :color blue)
       "
 CIDER Buddy: Documentation Commands Menu
-------------------------------------------
-_a_: cider-apropos               C-c C-d a
-_b_: cider-apropos-documentation C-c C-d f
-_c_: cider-doc                   C-c C-d C-d
-_g_: cider-doc-map               C-c C-d
-_e_: cider-grimoire              C-c C-d C-r
-_a_: cider-grimoire-web          C-c C-d C-h
-_f_: cider-javadoc               C-c C-d C-j"
+
+ Key^^    Command                      Shortcut
+----^^-----------------------------------------------
+ _a_:     cider-apropos                %(cider-buddy-shortcut-str 'cider-apropos)
+ _b_:     cider-apropos-documentation  %(cider-buddy-shortcut-str 'cider-apropos-documentation)
+ _c_:     cider-doc                    %(cider-buddy-shortcut-str 'cider-doc)
+ _g_:     cider-doc-map                %(cider-buddy-shortcut-str 'cider-doc-map)
+ _e_:     cider-grimoire               %(cider-buddy-shortcut-str 'cider-grimoire)
+ _a_:     cider-grimoire-web           %(cider-buddy-shortcut-str 'cider-grimoire-web)
+ _f_:     cider-javadoc                %(cider-buddy-shortcut-str 'cider-javadoc)"
       ("a"  cider-apropos)
       ("b"  cider-apropos-documentation)
       ("c"  cider-doc)
@@ -81,14 +89,16 @@ _f_: cider-javadoc               C-c C-d C-j"
     (defhydra hydra-cider-buddy-test (:hint nil :color blue)
       "
 CIDER Buddy: Test Commands Menu
-------------------------------------------
-_a_: cider-test-commands-map       C-c C-t
-_b_: cider-test-rerun-tests        C-c , r
-_c_: cider-test-run-loaded-tests   C-c , l
-_d_: cider-test-run-ns-tests       C-c , n
-_e_: cider-test-run-project-tests  C-c , p
-_f_: cider-test-run-test           C-c , t
-_g_: cider-test-show-report        C-c , b"
+
+ Key^^    Command                       Shortcut
+----^^----------------------------------------------
+ _a_:     cider-test-commands-map       %(cider-buddy-shortcut-str 'cider-test-commands-map)
+ _b_:     cider-test-rerun-tests        %(cider-buddy-shortcut-str 'cider-test-rerun-tests)
+ _c_:     cider-test-run-loaded-tests   %(cider-buddy-shortcut-str 'cider-test-run-loaded-tests)
+ _d_:     cider-test-run-ns-tests       %(cider-buddy-shortcut-str 'cider-test-run-ns-tests)
+ _e_:     cider-test-run-project-tests  %(cider-buddy-shortcut-str 'cider-test-run-project-tests)
+ _f_:     cider-test-run-test           %(cider-buddy-shortcut-str 'cider-test-run-test)
+ _g_:     cider-test-show-report        %(cider-buddy-shortcut-str 'cider-test-show-report)"
       ("a" cider-test-commands-map)
       ("b" cider-test-rerun-tests)
       ("c" cider-test-run-loaded-tests)
@@ -101,28 +111,30 @@ _g_: cider-test-show-report        C-c , b"
     (defhydra hydra-cider-buddy-other (:hint nil :color blue)
       "
 CIDER Buddy: Other Commands Menu
----------------------------------------------------------
-_a_: cider-display-connection-info                  C-c M-d
-_b_: cider-find-and-clear-repl-output               C-c C-o
-_c_: cider-find-ns                                  C-c C-.
-_d_: cider-find-resource                            C-c M-.
-_e_: cider-find-var
-_f_: cider-insert-last-sexp-in-repl                 C-c M-p
-_g_: cider-inspect                                  C-c M-i
-_h_: cider-load-buffer-and-switch-to-repl-buffer    C-c M-z
-_i_: cider-load-file                                C-l
-_k_: cider-macroexpand-all                          C-c M-m
-_l_: cider-pop-back                                 M-,
-_m_: cider-quit                                     C-c C-q
-_n_: cider-refresh                                  C-c C-x
-_o_: cider-repl-set-ns                              C-c M-n
-_p_: cider-rotate-default-connection                C-c M-r
-_q_: cider-selector                                 C-c M-s
-_r_: cider-switch-to-repl-buffer                    C-c C-z
-_s_: cider-test-commands-map                        C-c C-t C-c
-_t_: cider-toggle-trace-ns                          C-c M-t n
-_u_: cider-toggle-trace-var                         C-c M-t v
-_v_: cider-undef                                    C-c C-u"
+
+ Key^^    Command                                      Shortcut
+----^^-------------------------------------------------------------
+ _a_:     cider-display-connection-info                %(cider-buddy-shortcut-str 'cider-display-connection-info)
+ _b_:     cider-find-and-clear-repl-output             %(cider-buddy-shortcut-str 'cider-find-and-clear-repl-output)
+ _c_:     cider-find-ns                                %(cider-buddy-shortcut-str 'cider-find-ns)
+ _d_:     cider-find-resource                          %(cider-buddy-shortcut-str 'cider-find-resource)
+ _e_:     cider-find-var                               %(cider-buddy-shortcut-str 'cider-find-var)
+ _f_:     cider-insert-last-sexp-in-repl               %(cider-buddy-shortcut-str 'cider-insert-last-sexp-in-repl)
+ _g_:     cider-inspect                                %(cider-buddy-shortcut-str 'cider-inspect)
+ _h_:     cider-load-buffer-and-switch-to-repl-buffer  %(cider-buddy-shortcut-str 'cider-load-buffer-and-switch-to-repl-buffer)
+ _i_:     cider-load-file                              %(cider-buddy-shortcut-str 'cider-load-file)
+ _k_:     cider-macroexpand-all                        %(cider-buddy-shortcut-str 'cider-macroexpand-all)
+ _l_:     cider-pop-back                               %(cider-buddy-shortcut-str 'cider-pop-back)
+ _m_:     cider-quit                                   %(cider-buddy-shortcut-str 'cider-quit)
+ _n_:     cider-refresh                                %(cider-buddy-shortcut-str 'cider-refresh)
+ _o_:     cider-repl-set-ns                            %(cider-buddy-shortcut-str 'cider-repl-set-ns)
+ _p_:     cider-rotate-default-connection              %(cider-buddy-shortcut-str 'cider-rotate-default-connection)
+ _q_:     cider-selector                               %(cider-buddy-shortcut-str 'cider-selector)
+ _r_:     cider-switch-to-repl-buffer                  %(cider-buddy-shortcut-str 'cider-switch-to-repl-buffer)
+ _s_:     cider-test-commands-map                      %(cider-buddy-shortcut-str 'cider-test-commands-map)
+ _t_:     cider-toggle-trace-ns                        %(cider-buddy-shortcut-str 'cider-toggle-trace-ns)
+ _u_:     cider-toggle-trace-var                       %(cider-buddy-shortcut-str 'cider-toggle-trace-var)
+ _v_:     cider-undef                                  %(cider-buddy-shortcut-str 'cider-undef)"
       ("a"  cider-display-connection-info)
       ("b"  cider-find-and-clear-repl-output)
       ("c"  cider-find-ns)
